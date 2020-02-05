@@ -12,13 +12,28 @@
 import Foundation
 import CoreGraphics
 
-extension Comparable {
-    func clamped(to range: ClosedRange<Self>) -> Self {
-        if self > range.upperBound {
+#if canImport(UIKit)
+    import UIKit
+#endif
+
+#if canImport(Cocoa)
+import Cocoa
+#endif
+
+extension Comparable
+{
+    func clamped(to range: ClosedRange<Self>) -> Self
+    {
+        if self > range.upperBound
+        {
             return range.upperBound
-        } else if self < range.lowerBound {
+        }
+        else if self < range.lowerBound
+        {
             return range.lowerBound
-        } else {
+        }
+        else
+        {
             return self
         }
     }
@@ -171,6 +186,30 @@ open class ChartUtils
         
         NSUIGraphicsPushContext(context)
         
+        (text as NSString).draw(at: point, withAttributes: attributes)
+        
+        NSUIGraphicsPopContext()
+    }
+    
+    open class func drawText(context: CGContext, text: String, point: CGPoint, textSize: CGSize, backgroundColor: UIColor, align: NSTextAlignment, attributes: [NSAttributedString.Key : Any]?)
+    {
+        var point = point
+        
+        if align == .center
+        {
+            point.x -= text.size(withAttributes: attributes).width / 2.0
+        }
+        else if align == .right
+        {
+            point.x -= text.size(withAttributes: attributes).width
+        }
+        
+        NSUIGraphicsPushContext(context)
+        
+        let bezierPath = UIBezierPath(roundedRect: CGRect(x: point.x, y: point.y, width: textSize.width, height: textSize.height), cornerRadius: 2.0)
+        backgroundColor.setFill()
+        bezierPath.fill()
+
         (text as NSString).draw(at: point, withAttributes: attributes)
         
         NSUIGraphicsPopContext()
