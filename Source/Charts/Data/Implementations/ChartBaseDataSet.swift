@@ -75,7 +75,12 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     
     open var entryCount: Int
     {
-        fatalError("entryCount is not implemented in ChartBaseDataSet")
+        // fatalError("entryCount is not implemented in ChartBaseDataSet")
+        // Hackish fix to prevent app crashing after upgrade to new charts
+        // Note: this affects if tooltip is shown on chart point or not. If
+        // Chart will have more than this number of data points, then tooltip for
+        // exceeding data points will not be shown
+        return 5000;
     }
         
     open func entryForIndex(_ i: Int) -> ChartDataEntry?
@@ -399,7 +404,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     
     // MARK: - NSCopying
     
-    @objc open func copyWithZone(_ zone: NSZone?) -> AnyObject
+    @objc open func copy(with zone: NSZone? = nil) -> Any
     {
         let copy = type(of: self).init()
         

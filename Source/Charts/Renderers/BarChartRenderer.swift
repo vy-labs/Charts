@@ -827,7 +827,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 dataSetIndex: dataSetIndex,
                 viewPortHandler: viewPortHandler) ?? "\(e.y)"
 
-            elementValueText = stackLabel + " \(elementValueText)"
+            elementValueText = stackLabel! + " \(elementValueText)"
         }
 
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1

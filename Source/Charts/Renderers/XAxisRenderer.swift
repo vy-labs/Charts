@@ -408,28 +408,28 @@ open class XAxisRenderer: AxisRendererBase
 
         let (point, align): (CGPoint, NSTextAlignment)
         switch limitLine.labelPosition {
-        case .topRight:
+        case .topRight, .rightTop:
             point = CGPoint(
                 x: position.x + xOffset,
                 y: viewPortHandler.contentTop + yOffset
             )
             align = .left
 
-        case .bottomRight:
+        case .bottomRight, .rightBottom:
             point = CGPoint(
                 x: position.x + xOffset,
                 y: viewPortHandler.contentBottom - labelLineHeight - yOffset
             )
             align = .left
 
-        case .topLeft:
+        case .topLeft, .leftTop:
             point = CGPoint(
                 x: position.x - xOffset,
                 y: viewPortHandler.contentTop + yOffset
             )
             align = .right
 
-        case .bottomLeft:
+        case .bottomLeft, .leftBottom:
             point = CGPoint(
                 x: position.x - xOffset,
                 y: viewPortHandler.contentBottom - labelLineHeight - yOffset

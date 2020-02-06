@@ -94,7 +94,7 @@ open class ChartDataEntry: ChartDataEntryBase
     
     // MARK: NSCopying
     
-    @objc open func copyWithZone(_ zone: NSZone?) -> AnyObject
+    @objc open func copy(with zone: NSZone? = nil) -> Any
     {
         let copy = type(of: self).init()
         
